@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Adivinhação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #guess-input {
+            padding: 5px;
+        }
+
+        #result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo de Adivinhação</h1>
+    <p>Tente adivinhar o número entre 1 e 100:</p>
+    <input type="number" id="guess-input">
+    <button onclick="checkGuess()">Adivinhar</button>
+    <p id="result"></p>
+
+    <script>
+        // Gerar um número aleatório entre 1 e 100
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guess-input').value);
+            const resultElement = document.getElementById('result');
+            attempts++;
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                resultElement.textContent = 'Por favor, insira um número válido entre 1 e 100.';
+            } else if (guess < randomNumber) {
+                resultElement.textContent = 'Tente um número maior.';
+            } else if (guess > randomNumber) {
+                resultElement.textContent = 'Tente um número menor.';
+            } else {
+                resultElement.textContent = `Parabéns! Você acertou o número ${randomNumber} em ${attempts} tentativas.`;
+            }
+
+            document.getElementById('guess-input').value = '';
+        }
+    </script>
+</body>
+</html>
